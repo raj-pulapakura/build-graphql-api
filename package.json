@@ -1,0 +1,29 @@
+{
+  "name": "build-graphql-api",
+  "version": "1.0.0",
+  "description": "Build a beautiful, organised Graphql API with Typescript and Typeorm support, and pre-built examples, all with a single command!",
+  "main": "index.js",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "minimist": "^1.2.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dialto1/build-graphql-api.git"
+  },
+  "author": "Raj Pulapakura",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dialto1/build-graphql-api/issues"
+  },
+  "homepage": "https://github.com/dialto1/build-graphql-api#readme",
+  "keywords": [
+    "typescript",
+    "graphql",
+    "typeorm"
+  ]
+}

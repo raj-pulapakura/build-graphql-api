@@ -69,7 +69,7 @@ const main = async () => {
   await build(dir);
 
   console.log(
-    "\nPlease go to https://www.npmjs.com/package/@eagleapps/create-graphql-server"
+    "\nPlease go to https://www.npmjs.com/package//create-graphql-server"
       .green.bold
   );
 
