@@ -72,13 +72,6 @@ const main = async () => {
     "\nPlease go to https://www.npmjs.com/package/build-graphql-api for further instructions"
       .green.bold
   );
-
-  console.log("");
-  if (dir !== ".") {
-    console.log(`\t- cd ${dir}`);
-  }
-
-  console.log("\t- npm run dev");
 };
 
 main().catch((e) => {
