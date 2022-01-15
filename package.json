@@ -1,5 +1,5 @@
 {
-  "name": "build-graphql-api",
+  "name": "@dialto1/build-graphql-api",
   "version": "1.0.0",
   "description": "Build a beautiful, organised Graphql API with Typescript and Typeorm support, and pre-built examples, all with a single command!",
   "bin": "index.js",
