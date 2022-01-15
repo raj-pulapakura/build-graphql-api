@@ -69,7 +69,8 @@ const main = async () => {
   await build(dir);
 
   console.log(
-    "\nPlease go to https://www.npmjs.com/package/build-graphql-api".green.bold
+    "\nPlease go to https://www.npmjs.com/package/build-graphql-api for further instructions"
+      .green.bold
   );
 
   console.log("");
