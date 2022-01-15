@@ -4,4 +4,4 @@ git add .
 git commit -m "testing"
 git push
 
-npm publish --access=public
+npm publish
