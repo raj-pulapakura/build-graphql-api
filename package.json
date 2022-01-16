@@ -1,6 +1,6 @@
 {
   "name": "build-graphql-api",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Build a beautiful, organised Graphql API with Typescript and Typeorm support, and pre-built examples, all with a single command!",
   "bin": "index.js",
   "dependencies": {

@@ -64,7 +64,11 @@ module.exports.installDependencies = async (dir, session) => {
   packageDotJson["dependencies"]["graphql"] = "15.3.0";
 
   // write back
-  await writeFile(resolve(dir, "package.json"), packageDotJson, {
-    encoding: "utf-8",
-  });
+  await writeFile(
+    resolve(dir, "package.json"),
+    JSON.stringify(packageDotJson),
+    {
+      encoding: "utf-8",
+    }
+  );
 };
