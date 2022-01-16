@@ -23,11 +23,6 @@ const { build } = require("./jobs/build");
 const [dir] = argv._;
 const { session } = argv;
 
-module.exports = {
-  dir,
-  session,
-};
-
 const main = async () => {
   if (!dir) {
     throw new Error("\n📂 Please enter a directory!");
@@ -38,40 +33,40 @@ const main = async () => {
   }
 
   console.log("\n📃 Creating package.json...");
-  await createPackageDotJson();
+  await createPackageDotJson(dir);
 
   console.log("\n🌐 Installing dependencies... (this might take a while)");
-  await installDependencies();
+  await installDependencies(dir, session);
 
   console.log("\n🔨 Adding scripts...");
-  await addScripts();
+  await addScripts(dir);
 
   console.log("\n🦸 Configuring Typescript...");
-  await createTsConfigDotJson();
+  await createTsConfigDotJson(dir);
 
   console.log("\n🌳 Setting up environment...");
-  await createFolderStructure();
+  await createFolderStructure(dir);
 
-  await createEnvFile();
+  await createEnvFile(dir, session);
 
-  await createMainFiles();
+  await createMainFiles(dir, session);
 
-  await createConfigFiles();
+  await createConfigFiles(dir, session);
 
   console.log("\n👍 Creating utils...");
-  await createUtils();
+  await createUtils(dir, session);
 
   console.log("\n🏆 Creating examples...");
-  await createObjects();
+  await createObjects(dir);
 
-  await createAuthorFeature();
+  await createAuthorFeature(dir);
 
-  await createBookFeature();
+  await createBookFeature(dir);
 
   console.log("\n🛫 Bringing it all together...");
-  await createIndexDotTs();
+  await createIndexDotTs(dir, session);
 
-  await build();
+  await build(dir);
 
   console.log(
     "\nPlease go to https://www.npmjs.com/package/build-graphql-api for further instructions"

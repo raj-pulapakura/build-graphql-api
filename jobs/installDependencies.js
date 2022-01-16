@@ -1,10 +1,9 @@
 const { asyncExec } = require("../utils");
 const { readFile, writeFile } = require("fs").promises;
-const { dir } = require("../index");
 
-module.exports.installDependencies = async () => {
+module.exports.installDependencies = async (dir, session) => {
   // install dependencies
-  const dependencies = [
+  let dependencies = [
     "apollo-server",
     "apollo-server-express",
     "argon2",
@@ -20,18 +19,36 @@ module.exports.installDependencies = async () => {
     "uuid",
   ];
 
+  if (session) {
+    dependencies = [
+      ...dependencies,
+      "express-session",
+      "redis",
+      "connect-redis",
+    ];
+  }
+
   for (const dep of dependencies) {
     await asyncExec(`cd ${dir} && npm i ${dep} --legacy-peer-deps`);
   }
 
   // install dev dependencies
-  const devDependencies = [
+  let devDependencies = [
     "@types/express",
     "@types/node",
     "@types/uuid",
     "nodemon",
     "typescript",
   ];
+
+  if (session) {
+    devDependencies = [
+      ...devDependencies,
+      "@types/connect-redis",
+      "@types/express-session",
+      "@types/redis",
+    ];
+  }
 
   for (const dep of devDependencies) {
     await asyncExec(`cd ${dir} && npm i -D ${dep} --legacy-peer-deps`);

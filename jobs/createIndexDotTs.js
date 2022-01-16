@@ -1,12 +1,13 @@
 const { writeFile } = require("fs").promises;
 const { resolve } = require("path");
-const { dir } = require("../index");
 
-module.exports.createIndexDotTs = async () => {
+module.exports.createIndexDotTs = async (dir, session) => {
   await writeFile(
     resolve(dir, "src", "index.ts"),
     `import "reflect-metadata";
 import express from "express";
+import session from "express-session";
+import connectRedis from "connect-redis";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
@@ -14,6 +15,8 @@ import { config } from "dotenv";
 
 import { env } from "./constants";
 import { connectToDB } from "./utils/connectToDB";
+import { connectToRedis } from "./utils/connectToRedis";
+import { AUTH_COOKIE, env, SECRET } from "./constants";
 import { BookResolver } from "./features/Book/BookResolver";
 import { AuthorResolver } from "./features/Author/AuthorResolver";
 
@@ -25,6 +28,24 @@ const main = async () => {
 
   // Connect to database
   await connectToDB();
+
+  ${
+    session
+      ? `  const RedisStore = connectRedis(session);
+  const redisClient = await connectToRedis();
+
+  app.use(
+    session({
+      store: new RedisStore({ client: redisClient }),
+      cookie: sessionCookieConfig,
+      resave: false,
+      saveUninitialized: false,
+      secret: SECRET,
+      name: AUTH_COOKIE,
+    })
+  );`
+      : ""
+  }
 
   app.use(cors({
     credentials: true,
@@ -38,7 +59,7 @@ const main = async () => {
       validate: false,
       resolvers: [BookResolver, AuthorResolver],
     }),
-    context: ({ req, res }) => ({ req, res }),
+    context: ({ req, res }) => ({ req, res, redis: redisClient }),
   });
 
   await apolloServer.start();

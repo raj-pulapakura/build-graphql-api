@@ -1,6 +1,5 @@
-const { dir } = require("../index");
 const { asyncExec } = require("../utils");
 
-module.exports.build = async () => {
+module.exports.build = async (dir) => {
   await asyncExec(`cd ${dir} && tsc`);
 };

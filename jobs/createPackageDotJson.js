@@ -1,6 +1,5 @@
 const { asyncExec } = require("../utils");
-const { dir } = require("../index");
 
-module.exports.createPackageDotJson = async () => {
+module.exports.createPackageDotJson = async (dir) => {
   await asyncExec(`cd ${dir} && npm init -y`);
 };

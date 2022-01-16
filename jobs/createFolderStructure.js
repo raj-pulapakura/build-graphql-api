@@ -1,8 +1,7 @@
 const { resolve } = require("path");
 const { mkdir } = require("fs").promises;
-const { dir } = require("../index");
 
-module.exports.createFolderStructure = async () => {
+module.exports.createFolderStructure = async (dir) => {
   const paths = [
     resolve(dir, "dist"),
     resolve(dir, "src"),

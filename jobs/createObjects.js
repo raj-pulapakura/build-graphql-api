@@ -1,8 +1,7 @@
 const { writeFile } = require("fs").promises;
 const { resolve } = require("path");
-const { dir } = require("../index");
 
-module.exports.createObjects = async () => {
+module.exports.createObjects = async (dir) => {
   // create objects/BaseGraphql.ts
   await writeFile(
     resolve(dir, "src", "objects", "BaseGraphql.ts"),

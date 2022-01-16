@@ -1,8 +1,7 @@
 const { readFile, writeFile } = require("fs").promises;
 const { resolve } = require("path");
-const { dir } = require("../index");
 
-module.exports.addScripts = async () => {
+module.exports.addScripts = async (dir) => {
   const raw = await readFile(resolve(dir, "package.json"), {
     encoding: "utf-8",
   });

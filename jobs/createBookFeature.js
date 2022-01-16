@@ -1,8 +1,7 @@
 const { resolve } = require("path");
 const { writeFile, mkdir } = require("fs").promises;
-const { dir } = require("../index");
 
-module.exports.createBookFeature = async () => {
+module.exports.createBookFeature = async (dir) => {
   await mkdir(resolve(dir, "src", "features", "Book"));
   await mkdir(resolve(dir, "src", "features", "Book", "inputs"));
   await mkdir(resolve(dir, "src", "features", "Book", "objects"));
