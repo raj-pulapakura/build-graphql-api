@@ -107,7 +107,7 @@ const main = async () => {
       validate: false,
       resolvers: [BookResolver, AuthorResolver],
     }),
-    context: ({ req, res }) => ({ req, res, redis }),
+    context: ({ req, res }) => ({ req, res }),
   });
 
   await apolloServer.start();
