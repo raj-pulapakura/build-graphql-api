@@ -1,7 +1,7 @@
 const { writeFile } = require("fs").promises;
 const { resolve } = require("path");
 
-module.exports.createConfigFiles = async (dir, session) => {
+module.exports.createConfigFiles = async (dir) => {
   // create config/db.ts
   await writeFile(
     resolve(dir, "src", "config", "db.ts"),
@@ -25,22 +25,4 @@ export const dbConfig: ConnectionOptions = {
       encoding: "utf-8",
     }
   );
-
-  if (session) {
-    // config/redis.ts
-    await writeFile(
-      resolve(dir, "src", "config", "redis.ts"),
-      `import { env } from "../constants";
-import { ClientOpts } from "redis";
-
-export const redisConfig: ClientOpts = {
-  port: env.REDIS_PORT,
-  host: env.REDIS_HOST,
-};
-`,
-      {
-        encoding: "utf-8",
-      }
-    );
-  }
 };

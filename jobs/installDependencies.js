@@ -2,7 +2,7 @@ const { asyncExec } = require("../utils");
 const { readFile, writeFile } = require("fs").promises;
 const { resolve } = require("path");
 
-module.exports.installDependencies = async (dir, session) => {
+module.exports.installDependencies = async (dir) => {
   // install dependencies
   let dependencies = [
     "apollo-server",
@@ -20,15 +20,6 @@ module.exports.installDependencies = async (dir, session) => {
     "uuid",
   ];
 
-  if (session) {
-    dependencies = [
-      ...dependencies,
-      "express-session",
-      "redis",
-      "connect-redis",
-    ];
-  }
-
   for (const dep of dependencies) {
     await asyncExec(`cd ${dir} && npm i ${dep} --legacy-peer-deps`);
   }
@@ -41,15 +32,6 @@ module.exports.installDependencies = async (dir, session) => {
     "nodemon",
     "typescript",
   ];
-
-  if (session) {
-    devDependencies = [
-      ...devDependencies,
-      "@types/connect-redis",
-      "@types/express-session",
-      "@types/redis",
-    ];
-  }
 
   for (const dep of devDependencies) {
     await asyncExec(`cd ${dir} && npm i -D ${dep} --legacy-peer-deps`);

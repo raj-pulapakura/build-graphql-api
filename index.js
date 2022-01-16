@@ -3,6 +3,7 @@
 // MODULES
 const argv = require("minimist")(process.argv.slice(2));
 const { mkdir } = require("fs").promises;
+const colors = require("colors");
 
 // JOBS
 const { createPackageDotJson } = require("./jobs/createPackageDotJson");
@@ -36,7 +37,7 @@ const main = async () => {
   await createPackageDotJson(dir);
 
   console.log("\n🌐 Installing dependencies... (this might take a while)");
-  await installDependencies(dir, session);
+  await installDependencies(dir);
 
   console.log("\n🔨 Adding scripts...");
   await addScripts(dir);
@@ -47,14 +48,14 @@ const main = async () => {
   console.log("\n🌳 Setting up environment...");
   await createFolderStructure(dir);
 
-  await createEnvFile(dir, session);
+  await createEnvFile(dir);
 
-  await createMainFiles(dir, session);
+  await createMainFiles(dir);
 
-  await createConfigFiles(dir, session);
+  await createConfigFiles(dir);
 
   console.log("\n👍 Creating utils...");
-  await createUtils(dir, session);
+  await createUtils(dir);
 
   console.log("\n🏆 Creating examples...");
   await createObjects(dir);
@@ -64,12 +65,13 @@ const main = async () => {
   await createBookFeature(dir);
 
   console.log("\n🛫 Bringing it all together...");
-  await createIndexDotTs(dir, session);
+  await createIndexDotTs(dir);
 
   await build(dir);
 
   console.log(
     "\nPlease go to https://www.npmjs.com/package/build-graphql-api for further instructions"
+      .green.bold
   );
 };
 
