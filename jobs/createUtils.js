@@ -1,7 +1,7 @@
 const { writeFile } = require("fs").promises;
 const { resolve } = require("path");
 
-module.exports.createUtils = async (dir) => {
+module.exports.createUtils = async (dir, session) => {
   // create utils/connectToDB.ts
   await writeFile(
     resolve(dir, "src", "utils", "connectToDB.ts"),
@@ -40,9 +40,10 @@ export const connectToDB = async (): Promise<Connection> => {
   );
 
   // create connectToRedis.ts
-  await writeFile(
-    resolve(dir, "src", "utils", "connectToRedis.ts"),
-    `import { RedisClient, createClient } from "redis";
+  if (session) {
+    await writeFile(
+      resolve(dir, "src", "utils", "connectToRedis.ts"),
+      `import { RedisClient, createClient } from "redis";
 import { redisConfig } from "../config/redis";
 
 export const connectToRedis = (): Promise<RedisClient> => {
@@ -61,8 +62,9 @@ export const connectToRedis = (): Promise<RedisClient> => {
 };
 
 `,
-    {
-      encoding: "utf-8",
-    }
-  );
+      {
+        encoding: "utf-8",
+      }
+    );
+  }
 };
