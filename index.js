@@ -3,7 +3,6 @@
 // MODULES
 const argv = require("minimist")(process.argv.slice(2));
 const { mkdir } = require("fs").promises;
-const colors = require("colors");
 
 // JOBS
 const { createPackageDotJson } = require("./jobs/createPackageDotJson");
@@ -23,6 +22,9 @@ const { build } = require("./jobs/build");
 
 const main = async () => {
   const [dir] = argv._;
+  const { session } = argv;
+
+  console.log({ dir, session });
 
   if (!dir) {
     throw new Error("\n📂 Please enter a directory!");
