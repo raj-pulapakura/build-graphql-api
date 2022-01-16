@@ -1,5 +1,6 @@
 const { asyncExec } = require("../utils");
 const { readFile, writeFile } = require("fs").promises;
+const { resolve } = require("path");
 
 module.exports.installDependencies = async (dir, session) => {
   // install dependencies
