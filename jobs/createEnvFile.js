@@ -1,7 +1,8 @@
 const { writeFile } = require("fs").promises;
 const { resolve } = require("path");
+const { dir } = require("../index");
 
-module.exports.createEnvFile = async (dir) => {
+module.exports.createEnvFile = async () => {
   await writeFile(
     resolve(dir, ".env"),
     `PORT=80

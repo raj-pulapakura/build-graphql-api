@@ -1,7 +1,8 @@
 const { writeFile } = require("fs").promises;
 const { resolve } = require("path");
+const { dir } = require("../index");
 
-module.exports.createUtils = async (dir) => {
+module.exports.createUtils = async () => {
   // create utils/connectToDB.ts
   await writeFile(
     resolve(dir, "src", "utils", "connectToDB.ts"),

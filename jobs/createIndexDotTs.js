@@ -1,7 +1,8 @@
 const { writeFile } = require("fs").promises;
 const { resolve } = require("path");
+const { dir } = require("../index");
 
-module.exports.createIndexDotTs = async (dir) => {
+module.exports.createIndexDotTs = async () => {
   await writeFile(
     resolve(dir, "src", "index.ts"),
     `import "reflect-metadata";

@@ -1,7 +1,8 @@
 const { asyncExec } = require("../utils");
 const { readFile, writeFile } = require("fs").promises;
+const { dir } = require("../index");
 
-module.exports.installDependencies = async (dir) => {
+module.exports.installDependencies = async () => {
   // install dependencies
   const dependencies = [
     "apollo-server",
