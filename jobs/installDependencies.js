@@ -1,4 +1,5 @@
 const { asyncExec } = require("../utils");
+const { readFile, writeFile } = require("fs").promises;
 
 module.exports.installDependencies = async (dir) => {
   // install dependencies
@@ -34,4 +35,17 @@ module.exports.installDependencies = async (dir) => {
   for (const dep of devDependencies) {
     await asyncExec(`cd ${dir} && npm i -D ${dep} --legacy-peer-deps`);
   }
+
+  // get package.json
+  const raw = await readFile(resolve(dir, "package.json"), {
+    encoding: "utf-8",
+  });
+  const packageDotJson = JSON.parse(raw);
+
+  packageDotJson["dependencies"]["graphql"] = "15.3.0";
+
+  // write back
+  await writeFile(resolve(dir, "package.json"), packageDotJson, {
+    encoding: "utf-8",
+  });
 };
