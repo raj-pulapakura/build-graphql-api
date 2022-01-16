@@ -7,23 +7,30 @@ module.exports.createIndexDotTs = async (dir, session) => {
     `import "reflect-metadata";
 import express from "express";
 ${
-  session &&
-  `
+  session
+    ? `
 import session from "express-session";
 import connectRedis from "connect-redis";`
+    : ""
 }
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { config } from "dotenv";
 
-${!session && `import { env } from "./constants";`}
+${!session ? `import { env } from "./constants";` : ""}
 import { connectToDB } from "./utils/connectToDB";
-import { connectToRedis } from "./utils/connectToRedis";
 ${
-  session &&
-  `
+  session
+    ? `
+import { connectToRedis } from "./utils/connectToRedis";`
+    : ""
+}
+${
+  session
+    ? `
 import { env, AUTH_COOKIE, SECRET } from "./constants";`
+    : ""
 }
 import { BookResolver } from "./features/Book/BookResolver";
 import { AuthorResolver } from "./features/Author/AuthorResolver";
