@@ -70,7 +70,6 @@ const main = async () => {
 
   console.log(
     "\nPlease go to https://www.npmjs.com/package/build-graphql-api for further instructions"
-      .green.bold
   );
 };
 
